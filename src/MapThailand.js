@@ -35,6 +35,16 @@ class MapThailand extends Component {
             .append('path')
             .attr('d', path)
             .attr('vector-effect', 'non-scaling-stroke')
+            .on('mouseover', this.mouseover)
+            .on('mouseout', this.mouseout)
+    }
+
+    mouseover(d) {
+        d3.select(this).style('fill', 'orange')
+    }
+
+    mouseout(d) {
+        d3.select(this).style('fill', 'white')
     }
 
     render() {
