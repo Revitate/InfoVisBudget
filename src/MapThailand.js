@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react'
 import * as d3 from 'd3'
 import * as d3Geo from 'd3-geo'
 import mapThaiData from './thailand'
+import elecThaiData from './thai_city_elec'
 import './MapThailand.css'
 
 class MapThailand extends Component {
@@ -25,7 +26,10 @@ class MapThailand extends Component {
         if (this.hl.includes(d.properties.name)) {
             return 'green'
         }
-        return 'white'
+        else{
+            console.log(this.props.government)
+            return elecThaiData[d.properties.name][this.props.government]
+        }
     }
 
     renderMap() {
