@@ -25,6 +25,28 @@ const TrackBar = styled.div`
     height: 100vh;
     width: 3em;
     justify-content: center;
+    align-items: center;
+`
+
+const Icons = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 1em;
+    text-align: center;
+    width: 1.5em;
+    height: 1.5em;
+`
+
+const Icon = styled.i`
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+    opacity: ${props => (props.fade ? 0 : 1)};
 `
 
 class App extends Component {
@@ -59,7 +81,10 @@ class App extends Component {
         console.log(element.scrollTop)
         for (let i = 0; i < this.sectionNum; i++) {
             const section = this.sections[i].current
-            if (element.scrollTop < section.offsetTop + section.clientHeight) {
+            if (
+                element.scrollTop <
+                section.offsetTop + section.clientHeight / 2
+            ) {
                 this.setState({ currentSection: i })
                 return
             }
@@ -84,15 +109,45 @@ class App extends Component {
                     </Button>
                 </HeaderContainer>
                 <TrackBar>
-                    <Button onClick={this.scrollTo(this.sections[0])}>
-                        section1
-                    </Button>
-                    <Button onClick={this.scrollTo(this.sections[1])}>
-                        section2
-                    </Button>
-                    <Button onClick={this.scrollTo(this.sections[2])}>
-                        section3
-                    </Button>
+                    <Icons
+                        className="text-primary"
+                        onClick={this.scrollTo(this.sections[0])}
+                    >
+                        <Icon
+                            className="fas fa-circle"
+                            fade={this.state.currentSection !== 0}
+                        />
+                        <Icon
+                            className="far fa-circle"
+                            fade={this.state.currentSection === 0}
+                        />
+                    </Icons>
+                    <Icons
+                        className="text-primary"
+                        onClick={this.scrollTo(this.sections[1])}
+                    >
+                        <Icon
+                            className="fas fa-circle"
+                            fade={this.state.currentSection !== 1}
+                        />
+                        <Icon
+                            className="far fa-circle"
+                            fade={this.state.currentSection === 1}
+                        />
+                    </Icons>
+                    <Icons
+                        className="text-primary"
+                        onClick={this.scrollTo(this.sections[2])}
+                    >
+                        <Icon
+                            className="fas fa-circle"
+                            fade={this.state.currentSection !== 2}
+                        />
+                        <Icon
+                            className="far fa-circle"
+                            fade={this.state.currentSection === 2}
+                        />
+                    </Icons>
                 </TrackBar>
                 <SectionContainer
                     ref={this.container}

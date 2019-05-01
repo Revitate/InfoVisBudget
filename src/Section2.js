@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Button } from 'react-bootstrap'
 import { SectionPage } from './SectionPage'
 
 const Container = styled.div`
+    padding: 3em;
     display: flex;
     flex-direction: column;
     height: 100vh;

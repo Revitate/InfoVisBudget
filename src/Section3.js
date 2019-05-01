@@ -5,6 +5,7 @@ import { SectionPage } from './SectionPage'
 import tu_img from './assets/tu_1.png'
 
 const Container = styled.div`
+    padding: 3em;
     display: flex;
     flex-direction: column;
     height: 100vh;

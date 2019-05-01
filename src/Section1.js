@@ -14,6 +14,7 @@ const options = Object.keys(thai_city)
     }))
 
 const Container = styled.div`
+    padding: 3em;
     display: flex;
     width: 100vw;
     flex-wrap: wrap;
