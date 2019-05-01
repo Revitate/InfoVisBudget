@@ -8,15 +8,28 @@ class MapThailand extends Component {
     constructor(props) {
         super(props)
         this.svg = createRef()
+        this.hl = []
     }
 
     componentDidMount() {
         this.renderMap()
     }
+    componentWillReceiveProps(props) {
+        if (this.hl.length !== props.highlight.length) {
+            this.hl = props.highlight
+            this.renderMap()
+        }
+    }
+
+    fillfn = d => {
+        if (this.hl.includes(d.properties.name)) {
+            return 'green'
+        }
+        return 'white'
+    }
 
     renderMap() {
         const { features } = mapThaiData
-
         var projection = d3Geo
             .geoMercator()
             .scale(1700)
@@ -25,6 +38,7 @@ class MapThailand extends Component {
         var path = d3Geo.geoPath().projection(projection)
 
         const svg = d3.select(this.svg.current)
+        svg.selectAll('*').remove()
         const g = svg.append('g')
         const mapLayer = g.append('g').classed('map-layer', true)
 
@@ -35,6 +49,7 @@ class MapThailand extends Component {
             .append('path')
             .attr('d', path)
             .attr('vector-effect', 'non-scaling-stroke')
+            .attr('fill', this.fillfn)
             .on('mouseover', this.mouseover)
             .on('mouseout', this.mouseout)
     }
@@ -44,7 +59,7 @@ class MapThailand extends Component {
     }
 
     mouseout(d) {
-        d3.select(this).style('fill', 'white')
+        d3.select(this).style('fill', this.fillfn)
     }
 
     render() {

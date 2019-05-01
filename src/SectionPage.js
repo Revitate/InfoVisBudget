@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
 export const SectionPage = styled.section`
+    display: flex;
+    align-items: center;
     height: 100vh;
     width: 100vw;
     scroll-snap-align: center;
-    padding: 3em;
-    ${props => `
-        background-color: ${props.color};
-    `}
+    background-color: ${props => props.color};
 `
 
 export const SectionContainer = styled.div`
