@@ -5,6 +5,9 @@ import styled from 'styled-components'
 import { SectionPage } from './SectionPage'
 import MapThailand from './MapThailand'
 import thai_city from './thai_city.json'
+import average from './average.json'
+import abhisit_img from './assets/abhisit_1.png'
+import yingluck_img from './assets/yingrak_1.png'
 
 const options = Object.keys(thai_city)
     .sort((a, b) => (thai_city[a] < thai_city[b] ? -1 : 1))
@@ -24,6 +27,7 @@ const Container = styled.div`
 `
 const ConsoleBox = styled.div`
     display: flex;
+    width:40vw;
     justify-content: center;
     flex-direction: column;
 `
@@ -33,31 +37,35 @@ const SectionPageStyled = styled(SectionPage)`
     overflow-y: hidden;
     transform: translateX(
         ${props => {
-            switch (props.page) {
-                case 1:
-                    return '0vw'
-                case 2:
-                    return '-100vw'
-                default:
-                    return '0vw'
-            }
-        }}
+        switch (props.page) {
+            case 1:
+                return '0vw'
+            case 2:
+                return '-100vw'
+            default:
+                return '0vw'
+        }
+    }}
     );
+`
+
+const TextCenter = styled.div`
+    text-align: center;
 `
 
 class Section1 extends Component {
     state = {
         page: 1,
-        selectedOption: []
+        selectedOption: null
     }
 
     handleChange = selectedOption => {
-        if (selectedOption.length <= 3) {
-            this.setState({ selectedOption })
-        }
+        this.setState({ selectedOption })
+
     }
 
     render() {
+        console.log(this.state.selectedOption)
         return (
             <SectionPageStyled
                 ref={this.props.forwardedRef}
@@ -66,29 +74,32 @@ class Section1 extends Component {
             >
                 <Container out={this.state.page !== 1}>
                     <MapThailand
-                        government = {this.props.government}
-                        width={300}
-                        height={500}
-                        highlight={this.state.selectedOption.map(
-                            prov => prov.value
-                        )}
+                        government={this.props.government}
+                        width={500}
+                        height={700}
+                        highlight={this.state.selectedOption}
                     />
                     <ConsoleBox>
-                        <h1>Question: dsfsdfsd?</h1>
+                        <h1>Question: ถ้าคุณเป็นรัฐบาล
+                            คุณคิดว่าจังหวัดใดที่มีงบประมาณมากที่สุด</h1>
                         <Select
                             value={this.state.selectedOption}
-                            isMulti
                             onChange={this.handleChange}
                             options={options}
                             placeholder="เลือกจังหวัด..."
                         />
                         <Button
+                            {...(this.state.selectedOption === null && {
+                                variant: "secondary",
+                                disabled: true
+                            })}
                             onClick={() => {
                                 this.setState({ page: 2 })
                             }}
                         >
                             ส่ง
-                        </Button>
+                            </Button>
+
                         <Button
                             variant="light"
                             onClick={() => {
@@ -100,14 +111,31 @@ class Section1 extends Component {
                     </ConsoleBox>
                 </Container>
                 <Container out={this.state.page !== 2}>
+                    <img src={this.props.government == 'abhisit'?abhisit_img:yingluck_img}></img>
                     <ConsoleBox>
-                        <h1>Question: dsfsdfsd?</h1>
+                        <TextCenter>
+                            {this.props.government == 'abhisit'?
+                                <h1><i class="fas fa-paw"/>...เมี๊ยว...<i className="fas fa-cat" /></h1>
+                                :
+                                <h1>Thank you three times<i class="fas fa-comment"/></h1>
+                            }
+                            <h3>
+                                {
+                                    this.props.government == 'abhisit'?
+                                    this.state.selectedOption && this.state.selectedOption.label === average['max_govern'][this.props.government][0]?
+                                    "เก่งมาก":"ผมไม่เคยพูดว่าเราเอาลงจังหวัดนั้นมากสุดนะ"
+                                    :
+                                    this.state.selectedOption && this.state.selectedOption.label === average['max_govern'][this.props.government][0]?
+                                    "คุณถูกแล้ว":"แย่จัง ลองเดาใหม่ดูนะคะ"
+                                }
+                            </h3>
+                        </TextCenter>
                         <Button
                             onClick={() => {
                                 this.setState({ page: 1 })
                             }}
                         >
-                            back
+                            ย้อนกลับ
                         </Button>
                     </ConsoleBox>
                 </Container>
