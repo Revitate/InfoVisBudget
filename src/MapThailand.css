@@ -2,3 +2,35 @@
     fill: #fff;
     stroke: #aaa;
 }
+
+.color-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.red-color-box{
+    background: #f44242;
+    width: 1vw;
+    height: 1vw;
+}
+
+.blue-color-box{
+    background: #4286f4;
+    width: 1vw;
+    height: 1vw;
+}
+
+.red-tag{
+    color:#f44242;
+    margin:0;
+    margin-left: 0.2vw;
+    font-weight:bold;
+}
+
+.blue-tag{
+    color: #4286f4;
+    margin:0;
+    margin-left: 0.2vw;
+    font-weight:bold;
+}

@@ -84,17 +84,18 @@ class Section1 extends Component {
                         />
                         <Button
                             onClick={() => {
-                                this.props.nextPage()
-                            }}
-                        >
-                            ข้าม
-                        </Button>
-                        <Button
-                            onClick={() => {
                                 this.setState({ page: 2 })
                             }}
                         >
                             ส่ง
+                        </Button>
+                        <Button
+                            variant="light"
+                            onClick={() => {
+                                this.props.nextPage()
+                            }}
+                        >
+                            ข้าม
                         </Button>
                     </ConsoleBox>
                 </Container>

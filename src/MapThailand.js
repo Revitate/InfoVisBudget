@@ -73,13 +73,23 @@ class MapThailand extends Component {
 
     render() {
         return (
-            <>
+            <div>
                 <svg
                     ref={this.svg}
                     width={this.props.width}
                     height={this.props.height}
                 />
-            </>
+                <div>
+                    <div className="color-container">
+                        <div className="red-color-box"/>
+                        <p className="red-tag"> - ฝ่ายค้าน</p>
+                    </div>
+                    <div className="color-container">
+                        <div className="blue-color-box"/>
+                        <p className="blue-tag"> - ฝ่ายรัฐบาล</p>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
