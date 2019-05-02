@@ -122,7 +122,6 @@ class App extends Component {
 
     handleClickTab = page => {
         return () => {
-            console.log(page)
             this.setState({ page })
         }
     }
