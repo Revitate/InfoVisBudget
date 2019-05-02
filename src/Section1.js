@@ -94,10 +94,15 @@ class Section1 extends Component {
     render() {
         return (
             <div
-                style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}
+                ref={this.props.forwardedRef}
+                style={{
+                    height: '100vh',
+                    width: '100vw',
+                    overflow: 'hidden',
+                    scrollSnapAlign: 'center'
+                }}
             >
                 <SectionPageStyled
-                    ref={this.props.forwardedRef}
                     page={this.state.page}
                     color={this.props.bgc}
                 >

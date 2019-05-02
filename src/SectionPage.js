@@ -8,6 +8,7 @@ export const SectionPage = styled.section`
     scroll-snap-align: center;
     background-color: ${props => props.color};
     transition: background-color 0.5s, transform 1s;
+    overflow: hidden;
 `
 
 export const SectionContainer = styled.div`
