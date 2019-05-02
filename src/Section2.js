@@ -11,7 +11,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
 `

@@ -88,7 +88,7 @@ class BudgetGraph extends Component {
                 prov_name = right_key[i - left_key.length - 1]
             }
             tooltip
-                .html(prov_name + ' : ' + d)
+                .html(prov_name + ' : ' + d.toFixed(2))
                 .style('left', d3.event.pageX + 'px')
                 .style('top', d3.event.pageY - 28 + 'px')
         }
@@ -114,13 +114,13 @@ class BudgetGraph extends Component {
         }
         const mousemove_l1 = function(d) {
             tooltip
-                .html('Average Budget : ' + lineEnd1)
+                .html('Average Budget : ' + lineEnd1.toFixed(2))
                 .style('left', d3.event.pageX + 'px')
                 .style('top', d3.event.pageY - 28 + 'px')
         }
         const mousemove_l2 = function(d) {
             tooltip
-                .html('Average Budget : ' + lineEnd2)
+                .html('Average Budget : ' + lineEnd2.toFixed(2))
                 .style('left', d3.event.pageX + 'px')
                 .style('top', d3.event.pageY - 28 + 'px')
         }
