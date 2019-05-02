@@ -10,6 +10,7 @@ class MapThailand extends Component {
         super(props)
         this.svg = createRef()
         this.hl = []
+        this.govern = 'abhisit'
     }
 
     componentDidMount() {
@@ -20,6 +21,11 @@ class MapThailand extends Component {
             this.hl = props.highlight
             this.renderMap()
         }
+        if (this.govern !== props.government) {
+            console.log(this.props)
+            this.govern = props.government
+            this.renderMap()
+        }
     }
 
     fillfn = d => {
@@ -27,8 +33,7 @@ class MapThailand extends Component {
             return 'green'
         }
         else{
-            console.log(this.props.government)
-            return elecThaiData[d.properties.name][this.props.government]
+            return elecThaiData[d.properties.name][this.govern]
         }
     }
 
