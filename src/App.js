@@ -10,10 +10,13 @@ import Section3 from './Section3'
 const HeaderContainer = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     z-index: 1;
     position: fixed;
-    height: 3em;
+    height: 4em;
     width: 100vw;
+    background-color: white;
+    list-style-type: none;
 `
 
 const TrackBar = styled.div`
@@ -47,6 +50,32 @@ const Icon = styled.i`
     transform: translate(-50%, -50%);
     transition: opacity 0.3s;
     opacity: ${props => (props.fade ? 0 : 1)};
+`
+
+const SlideButton = styled.div`
+    position: absolute;
+    width: 50vw;
+    height: 3em;
+    border-radius: 0.5em 0.5em 0 0;
+    background-color: ${props => (props.right ? '#FF5252' : '#9FE7FF')};
+    z-index: -1;
+    transition: 0.5s;
+    ${props => props.right && `transform: translateX(100%);`}
+`
+
+const LineButton = styled.div`
+    width: 100vw;
+    background-color: ${props => (props.right ? '#FF5252' : '#9FE7FF')};
+    transition: 0.5s;
+`
+
+const ButtonStyled = styled.div`
+    width: 50vw;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 `
 
 class App extends Component {
@@ -98,15 +127,19 @@ class App extends Component {
     }
 
     render() {
+        const right = this.state.page === 'yingluck'
+        const bgc = right ? '#FF5252' : '#9FE7FF'
         return (
             <>
                 <HeaderContainer>
-                    <Button onClick={this.handleClickTab('abhisit')}>
+                    <SlideButton right={right} />
+                    <ButtonStyled onClick={this.handleClickTab('abhisit')}>
                         abhisit
-                    </Button>
-                    <Button onClick={this.handleClickTab('yingluck')}>
+                    </ButtonStyled>
+                    <ButtonStyled onClick={this.handleClickTab('yingluck')}>
                         yingluck
-                    </Button>
+                    </ButtonStyled>
+                    <LineButton right={right} />
                 </HeaderContainer>
                 <TrackBar>
                     <Icons
@@ -156,9 +189,10 @@ class App extends Component {
                     <Section1
                         forwardedRef={this.sections[0]}
                         nextPage={this.scrollTo(this.sections[1])}
+                        bgc={bgc}
                     />
-                    <Section2 forwardedRef={this.sections[1]} />
-                    <Section3 forwardedRef={this.sections[2]} />
+                    <Section2 forwardedRef={this.sections[1]} bgc={bgc} />
+                    <Section3 forwardedRef={this.sections[2]} bgc={bgc} />
                 </SectionContainer>
             </>
         )

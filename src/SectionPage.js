@@ -7,6 +7,7 @@ export const SectionPage = styled.section`
     width: 100vw;
     scroll-snap-align: center;
     background-color: ${props => props.color};
+    transition: background-color 0.5s, transform 1s;
 `
 
 export const SectionContainer = styled.div`
