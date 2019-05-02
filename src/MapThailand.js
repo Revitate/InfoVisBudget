@@ -9,7 +9,7 @@ class MapThailand extends Component {
     constructor(props) {
         super(props)
         this.svg = createRef()
-        this.hl = []
+        this.hl = null
         this.govern = 'abhisit'
     }
 
@@ -17,7 +17,7 @@ class MapThailand extends Component {
         this.renderMap()
     }
     componentWillReceiveProps(props) {
-        if (this.hl.length !== props.highlight.length) {
+        if (this.hl !== props.highlight) {
             this.hl = props.highlight
             this.renderMap()
         }
@@ -33,15 +33,16 @@ class MapThailand extends Component {
     }
     
     fillst = d => {
-        if (this.hl.includes(d.properties.name)) {
+        if (this.hl && this.hl.value === d.properties.name) {
             return '#02c987'
         }
     }
     
     chwidth = d => {
-        if (this.hl.includes(d.properties.name)) {
+        if (this.hl && this.hl.value === d.properties.name) {
             return '4'
         }
+        return '1'
     }
 
     renderMap() {
@@ -81,7 +82,7 @@ class MapThailand extends Component {
     mouseout(d) {
         d3.select(this)
         .style('stroke', '')
-        .style('stroke-width', '1')
+        .style('stroke-width',this.chwidth)
     }
 
     render() {
