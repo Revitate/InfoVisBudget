@@ -31,7 +31,6 @@ const ConsoleBox = styled.div`
 const SectionPageStyled = styled(SectionPage)`
     width: 200vw;
     overflow-y: hidden;
-    transition: 1s;
     transform: translateX(
         ${props => {
             switch (props.page) {
@@ -63,6 +62,7 @@ class Section1 extends Component {
             <SectionPageStyled
                 ref={this.props.forwardedRef}
                 page={this.state.page}
+                color={this.props.bgc}
             >
                 <Container out={this.state.page !== 1}>
                     <MapThailand

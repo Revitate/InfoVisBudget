@@ -16,7 +16,7 @@ const Container = styled.div`
 class Section2 extends Component {
     render() {
         return (
-            <SectionPage ref={this.props.forwardedRef}>
+            <SectionPage ref={this.props.forwardedRef} color={this.props.bgc}>
                 <Container>
                     <h1>Some Graph</h1>
                     <h1>Some Graph</h1>
