@@ -29,11 +29,18 @@ class MapThailand extends Component {
     }
 
     fillfn = d => {
+        return elecThaiData[d.properties.name][this.govern]
+    }
+    
+    fillst = d => {
         if (this.hl.includes(d.properties.name)) {
-            return 'green'
+            return '#02c987'
         }
-        else{
-            return elecThaiData[d.properties.name][this.govern]
+    }
+    
+    chwidth = d => {
+        if (this.hl.includes(d.properties.name)) {
+            return '4'
         }
     }
 
@@ -41,7 +48,7 @@ class MapThailand extends Component {
         const { features } = mapThaiData
         var projection = d3Geo
             .geoMercator()
-            .scale(1700)
+            .scale(2200)
             .rotate([-100.6331, -13.2])
             .translate([this.props.width / 2, this.props.height / 2])
         var path = d3Geo.geoPath().projection(projection)
@@ -59,16 +66,22 @@ class MapThailand extends Component {
             .attr('d', path)
             .attr('vector-effect', 'non-scaling-stroke')
             .attr('fill', this.fillfn)
+            .attr('stroke',this.fillst)
+            .attr('stroke-width',this.chwidth)
             .on('mouseover', this.mouseover)
             .on('mouseout', this.mouseout)
     }
 
     mouseover(d) {
-        d3.select(this).style('fill', 'orange')
+        d3.select(this)
+        .style('stroke', 'orange')
+        .style('stroke-width', '4')
     }
 
     mouseout(d) {
-        d3.select(this).style('fill', this.fillfn)
+        d3.select(this)
+        .style('stroke', '')
+        .style('stroke-width', '1')
     }
 
     render() {
@@ -79,16 +92,6 @@ class MapThailand extends Component {
                     width={this.props.width}
                     height={this.props.height}
                 />
-                <div>
-                    <div className="color-container">
-                        <div className="red-color-box"/>
-                        <p className="red-tag"> - ฝ่ายค้าน</p>
-                    </div>
-                    <div className="color-container">
-                        <div className="blue-color-box"/>
-                        <p className="blue-tag"> - ฝ่ายรัฐบาล</p>
-                    </div>
-                </div>
             </div>
         )
     }

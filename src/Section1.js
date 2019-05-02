@@ -67,8 +67,8 @@ class Section1 extends Component {
                 <Container out={this.state.page !== 1}>
                     <MapThailand
                         government = {this.props.government}
-                        width={300}
-                        height={500}
+                        width={500}
+                        height={700}
                         highlight={this.state.selectedOption.map(
                             prov => prov.value
                         )}
@@ -82,13 +82,22 @@ class Section1 extends Component {
                             options={options}
                             placeholder="เลือกจังหวัด..."
                         />
-                        <Button
-                            onClick={() => {
-                                this.setState({ page: 2 })
-                            }}
-                        >
-                            ส่ง
-                        </Button>
+                        {this.state.selectedOption.length != 0?
+                            <Button
+                                onClick={() => {
+                                    this.setState({ page: 2 })
+                                }}
+                            >
+                                ส่ง
+                            </Button>
+                            :
+                            <Button
+                                variant="secondary"
+                                disabled
+                            >
+                                ส่ง
+                            </Button>
+                        }
                         <Button
                             variant="light"
                             onClick={() => {
