@@ -36,7 +36,7 @@ const Container = styled.div`
     height: 100vh;
     background-color: white;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-evenly;
     transition: 0.5s;
     opacity: ${props => (props.out ? 0 : 1)};
@@ -53,7 +53,6 @@ const StyledRow = styled(Row)``
 
 const SectionPageStyled = styled(SectionPage)`
     width: 200vw;
-    overflow-y: hidden;
     transform: translateX(
         ${props => {
             switch (props.page) {
@@ -66,6 +65,11 @@ const SectionPageStyled = styled(SectionPage)`
             }
         }}
     );
+`
+
+const TextLeft = styled.h1`
+    align-self: flex-start;
+    text-align: left;
 `
 
 const TextCenter = styled.div`
@@ -89,100 +93,117 @@ class Section1 extends Component {
 
     render() {
         return (
-            <SectionPageStyled
-                ref={this.props.forwardedRef}
-                page={this.state.page}
-                color={this.props.bgc}
+            <div
+                style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}
             >
-                <Container out={this.state.page !== 1}>
-                    <MapThailand
-                        government={this.props.government}
-                        width={500}
-                        height={700}
-                        highlight={this.state.selectedOption}
-                    />
-                    <ConsoleBox>
-                        <h1>
-                            Question: ถ้าคุณเป็นรัฐบาล
-                            คุณคิดว่าจังหวัดใดที่มีงบประมาณมากที่สุด
-                        </h1>
-                        <StyledSelect
-                            value={this.state.selectedOption}
-                            onChange={this.handleChange}
-                            options={options}
-                            placeholder="เลือกจังหวัด..."
+                <SectionPageStyled
+                    ref={this.props.forwardedRef}
+                    page={this.state.page}
+                    color={this.props.bgc}
+                >
+                    <Container out={this.state.page !== 1}>
+                        <MapThailand
+                            government={this.props.government}
+                            width={500}
+                            height={700}
+                            highlight={this.state.selectedOption}
                         />
-                        <StyledRow>
-                            <StyledButton
-                                variant="light"
+                        <ConsoleBox>
+                            <TextLeft>จากแผนที่แสดงฐานเสียงของรัฐบาล</TextLeft>
+                            <TextLeft>
+                                ในรัฐบาล{' '}
+                                {this.props.government === 'abhisit' ? (
+                                    <b>อภิสิทธิ์</b>
+                                ) : (
+                                    <b>ยิ่งลักษณ์</b>
+                                )}{' '}
+                                <br />
+                                คุณคิดว่าจังหวัดฐานเสียงใดที่
+                                <br />
+                                ได้ <b>งบประมาณต่อประชากร</b> มากที่สุด
+                            </TextLeft>
+                            <StyledSelect
+                                value={this.state.selectedOption}
+                                onChange={this.handleChange}
+                                options={options}
+                                placeholder="เลือกจังหวัด..."
+                            />
+                            <StyledRow>
+                                <StyledButton
+                                    variant="light"
+                                    onClick={() => {
+                                        this.props.nextPage()
+                                    }}
+                                >
+                                    ข้าม
+                                </StyledButton>
+                                <StyledButton
+                                    {...this.state.selectedOption === null && {
+                                        variant: 'secondary',
+                                        disabled: true
+                                    }}
+                                    onClick={() => {
+                                        this.setState({ page: 2 })
+                                    }}
+                                >
+                                    ส่ง
+                                </StyledButton>
+                            </StyledRow>
+                        </ConsoleBox>
+                    </Container>
+                    <Container out={this.state.page !== 2}>
+                        <StyledImg
+                            src={
+                                this.props.government === 'abhisit'
+                                    ? abhisit_img
+                                    : yingluck_img
+                            }
+                            height="60%"
+                            alt="props"
+                        />
+                        <ConsoleBox>
+                            <TextCenter>
+                                {this.props.government === 'abhisit' ? (
+                                    <h1>
+                                        <i className="fas fa-paw" />
+                                        ...เมี๊ยว...
+                                        <i className="fas fa-cat" />
+                                    </h1>
+                                ) : (
+                                    <h1>
+                                        Thank you three times{' '}
+                                        <i className="fas fa-comment" />
+                                    </h1>
+                                )}
+                                <h3>
+                                    {this.props.government === 'abhisit'
+                                        ? this.state.selectedOption &&
+                                          this.state.selectedOption.label ===
+                                              max_govern[
+                                                  this.props.government
+                                              ][0]
+                                            ? 'เก่งมาก'
+                                            : 'ผมไม่เคยพูดว่าเราเอาลงจังหวัดนั้นมากสุดนะ'
+                                        : this.state.selectedOption &&
+                                          this.state.selectedOption.label ===
+                                              max_govern[
+                                                  this.props.government
+                                              ][0]
+                                        ? 'คุณถูกแล้ว'
+                                        : 'แย่จัง ลองเดาใหม่ดูนะคะ'}
+                                </h3>
+                            </TextCenter>
+                            <Button
                                 onClick={() => {
-                                    this.props.nextPage()
+                                    this.setState({ page: 1 })
                                 }}
                             >
-                                ข้าม
-                            </StyledButton>
-                            <StyledButton
-                                {...this.state.selectedOption === null && {
-                                    variant: 'secondary',
-                                    disabled: true
-                                }}
-                                onClick={() => {
-                                    this.setState({ page: 2 })
-                                }}
-                            >
-                                ส่ง
-                            </StyledButton>
-                        </StyledRow>
-                    </ConsoleBox>
-                </Container>
-                <Container out={this.state.page !== 2}>
-                    <StyledImg
-                        src={
-                            this.props.government === 'abhisit'
-                                ? abhisit_img
-                                : yingluck_img
-                        }
-                        height="60%"
-                        alt="props"
-                    />
-                    <ConsoleBox>
-                        <TextCenter>
-                            {this.props.government === 'abhisit' ? (
-                                <h1>
-                                    <i className="fas fa-paw" />
-                                    ...เมี๊ยว...
-                                    <i className="fas fa-cat" />
-                                </h1>
-                            ) : (
-                                <h1>
-                                    Thank you three times
-                                    <i className="fas fa-comment" />
-                                </h1>
-                            )}
-                            <h3>
-                                {this.props.government === 'abhisit'
-                                    ? this.state.selectedOption &&
-                                      this.state.selectedOption.label ===
-                                          max_govern[this.props.government][0]
-                                        ? 'เก่งมาก'
-                                        : 'ผมไม่เคยพูดว่าเราเอาลงจังหวัดนั้นมากสุดนะ'
-                                    : this.state.selectedOption &&
-                                      this.state.selectedOption.label ===
-                                          max_govern[this.props.government][0]
-                                    ? 'คุณถูกแล้ว'
-                                    : 'แย่จัง ลองเดาใหม่ดูนะคะ'}
-                            </h3>
-                        </TextCenter>
-                        <Button
-                            onClick={() => {
-                                this.setState({ page: 1 })
-                            }}
-                        >
-                            ย้อนกลับ
-                        </Button>
-                    </ConsoleBox>
-                </Container>
-            </SectionPageStyled>
+                                ย้อนกลับ
+                            </Button>
+                        </ConsoleBox>
+                    </Container>
+                </SectionPageStyled>
+            </div>
         )
     }
 }

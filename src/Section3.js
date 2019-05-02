@@ -20,24 +20,12 @@ const Container = styled.div`
 `
 const Backtext = styled.p`
     text-align: center;
-    font-size: 8vw;
+    font-size: 5em;
     font-weight: bold;
 `
-const Stand = styled.img`
-`
 const RowContainer = styled.div`
-    margin: 0em 1em 0em 1em;
-    padding: 4em 3em 1em 3em;
     display: flex;
     flex-direction: row;
-    height: 100vh;
-    width: calc(100vw - (2em));
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-    background-color: white;
-    position: relative;
 `
 class Section3 extends Component {
     render() {
@@ -46,7 +34,15 @@ class Section3 extends Component {
                 <Container>
                     <RowContainer>
                         <img src={tu_img} alt="tu" height="95%" />
-                        <Backtext>แล้วเจอกันใหม่</Backtext>
+                        <div
+                            style={{
+                                marginTop: 'auto',
+                                marginBottom: 'auto',
+                                width: '50em'
+                            }}
+                        >
+                            <Backtext>แล้วเจอกันใหม่</Backtext>
+                        </div>
                     </RowContainer>
                 </Container>
             </SectionPage>
