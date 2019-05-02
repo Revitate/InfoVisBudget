@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { SectionPage } from './SectionPage'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { SectionPage } from './SectionPage';
+import ChartWrapper from "./Budget_graph";
 
 const Container = styled.div`
     padding: 3em;
@@ -18,8 +19,8 @@ class Section2 extends Component {
         return (
             <SectionPage ref={this.props.forwardedRef} color={this.props.bgc}>
                 <Container>
-                    <h1>Some Graph</h1>
-                    <h1>Some Graph</h1>
+                    <h1>รายงานงบประมาณในแต่ละจังหวัด</h1>
+                    <ChartWrapper />
                 </Container>
             </SectionPage>
         )
