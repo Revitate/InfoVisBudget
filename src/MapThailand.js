@@ -22,7 +22,6 @@ class MapThailand extends Component {
             this.renderMap()
         }
         if (this.govern !== props.government) {
-            console.log(this.props)
             this.govern = props.government
             this.renderMap()
         }
@@ -31,13 +30,13 @@ class MapThailand extends Component {
     fillfn = d => {
         return elecThaiData[d.properties.name][this.govern]
     }
-    
+
     fillst = d => {
         if (this.hl && this.hl.value === d.properties.name) {
             return '#02c987'
         }
     }
-    
+
     chwidth = d => {
         if (this.hl && this.hl.value === d.properties.name) {
             return '4'
@@ -67,22 +66,22 @@ class MapThailand extends Component {
             .attr('d', path)
             .attr('vector-effect', 'non-scaling-stroke')
             .attr('fill', this.fillfn)
-            .attr('stroke',this.fillst)
-            .attr('stroke-width',this.chwidth)
+            .attr('stroke', this.fillst)
+            .attr('stroke-width', this.chwidth)
             .on('mouseover', this.mouseover)
             .on('mouseout', this.mouseout)
     }
 
-    mouseover(d) {
+    mouseover() {
         d3.select(this)
-        .style('stroke', 'orange')
-        .style('stroke-width', '4')
+            .style('stroke', 'orange')
+            .style('stroke-width', '4')
     }
 
-    mouseout(d) {
+    mouseout() {
         d3.select(this)
-        .style('stroke', '')
-        .style('stroke-width',this.chwidth)
+            .style('stroke', '')
+            .style('stroke-width', this.chwidth)
     }
 
     render() {

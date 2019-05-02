@@ -5,12 +5,12 @@ import { SectionPage } from './SectionPage'
 import tu_img from './assets/tu_1.png'
 
 const Container = styled.div`
-    margin: 0em 1em 1em 1em;
-    padding: 0em 3em 0em 3em;
+    margin: 0em 1em 0em 1em;
+    padding: 4em 3em 1em 3em;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - (1em));
-    width: calc(100vw - (2 * 1em));
+    height: 100vh;
+    width: calc(100vw - (2em));
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;

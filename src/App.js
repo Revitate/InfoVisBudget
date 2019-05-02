@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react'
-import { Button } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import styled from 'styled-components'
 
 import { SectionContainer } from './SectionPage'
@@ -9,14 +9,13 @@ import Section3 from './Section3'
 
 const HeaderContainer = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     z-index: 1;
     position: fixed;
     height: 4em;
     width: 100vw;
     background-color: white;
-    list-style-type: none;
 `
 
 const TrackBar = styled.div`
@@ -24,6 +23,7 @@ const TrackBar = styled.div`
     flex-direction: column;
     z-index: 1;
     position: fixed;
+    margin-left: 3em;
     padding: 0;
     height: 100vh;
     width: 3em;
@@ -65,8 +65,14 @@ const SlideButton = styled.div`
 
 const LineButton = styled.div`
     width: 100vw;
+    height: 1em;
     background-color: ${props => (props.right ? '#FF5252' : '#9FE7FF')};
     transition: 0.5s;
+`
+const LineButtom = styled(LineButton)`
+    position: fixed;
+    left: 0;
+    bottom: 0;
 `
 
 const ButtonStyled = styled.div`
@@ -107,7 +113,6 @@ class App extends Component {
 
     handleScroll = e => {
         let element = e.target
-        // console.log(element.scrollTop)
         for (let i = 0; i < this.sectionNum; i++) {
             const section = this.sections[i].current
             if (
@@ -122,7 +127,6 @@ class App extends Component {
 
     handleClickTab = page => {
         return () => {
-            console.log(page)
             this.setState({ page })
         }
     }
@@ -133,14 +137,17 @@ class App extends Component {
         return (
             <>
                 <HeaderContainer>
-                    <SlideButton right={right} />
-                    <ButtonStyled onClick={this.handleClickTab('abhisit')}>
-                        abhisit
-                    </ButtonStyled>
-                    <ButtonStyled onClick={this.handleClickTab('yingluck')}>
-                        yingluck
-                    </ButtonStyled>
+                    <Row>
+                        <SlideButton right={right} />
+                        <ButtonStyled onClick={this.handleClickTab('abhisit')}>
+                            abhisit
+                        </ButtonStyled>
+                        <ButtonStyled onClick={this.handleClickTab('yingluck')}>
+                            yingluck
+                        </ButtonStyled>
+                    </Row>
                     <LineButton right={right} />
+                    <LineButtom right={right} />
                 </HeaderContainer>
                 <TrackBar>
                     <Icons
@@ -188,12 +195,16 @@ class App extends Component {
                     onScroll={this.handleScroll}
                 >
                     <Section1
-                        government = {this.state.page}
+                        government={this.state.page}
                         forwardedRef={this.sections[0]}
                         nextPage={this.scrollTo(this.sections[1])}
                         bgc={bgc}
                     />
-                    <Section2 forwardedRef={this.sections[1]} bgc={bgc} />
+                    <Section2
+                        forwardedRef={this.sections[1]}
+                        bgc={bgc}
+                        government={this.state.page}
+                    />
                     <Section3 forwardedRef={this.sections[2]} bgc={bgc} />
                 </SectionContainer>
             </>
