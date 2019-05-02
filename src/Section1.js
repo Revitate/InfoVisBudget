@@ -66,6 +66,7 @@ class Section1 extends Component {
             >
                 <Container out={this.state.page !== 1}>
                     <MapThailand
+                        government = {this.props.government}
                         width={300}
                         height={500}
                         highlight={this.state.selectedOption.map(

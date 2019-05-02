@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react'
 import * as d3 from 'd3'
 import * as d3Geo from 'd3-geo'
 import mapThaiData from './thailand'
+import elecThaiData from './thai_city_elec'
 import './MapThailand.css'
 
 class MapThailand extends Component {
@@ -9,6 +10,7 @@ class MapThailand extends Component {
         super(props)
         this.svg = createRef()
         this.hl = []
+        this.govern = 'abhisit'
     }
 
     componentDidMount() {
@@ -19,13 +21,20 @@ class MapThailand extends Component {
             this.hl = props.highlight
             this.renderMap()
         }
+        if (this.govern !== props.government) {
+            console.log(this.props)
+            this.govern = props.government
+            this.renderMap()
+        }
     }
 
     fillfn = d => {
         if (this.hl.includes(d.properties.name)) {
             return 'green'
         }
-        return 'white'
+        else{
+            return elecThaiData[d.properties.name][this.govern]
+        }
     }
 
     renderMap() {

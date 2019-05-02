@@ -107,7 +107,7 @@ class App extends Component {
 
     handleScroll = e => {
         let element = e.target
-        console.log(element.scrollTop)
+        // console.log(element.scrollTop)
         for (let i = 0; i < this.sectionNum; i++) {
             const section = this.sections[i].current
             if (
@@ -122,6 +122,7 @@ class App extends Component {
 
     handleClickTab = page => {
         return () => {
+            console.log(page)
             this.setState({ page })
         }
     }
@@ -187,6 +188,7 @@ class App extends Component {
                     onScroll={this.handleScroll}
                 >
                     <Section1
+                        government = {this.state.page}
                         forwardedRef={this.sections[0]}
                         nextPage={this.scrollTo(this.sections[1])}
                         bgc={bgc}
