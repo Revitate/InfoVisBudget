@@ -117,7 +117,7 @@ class Section1 extends Component {
                             {this.props.government == 'abhisit'?
                                 <h1><i class="fas fa-paw"/>...เมี๊ยว...<i className="fas fa-cat" /></h1>
                                 :
-                                <h1><i class="fas fa-paw"/>Thank you three times<i className="fas fa-cat" /></h1>
+                                <h1>Thank you three times<i class="fas fa-comment"/></h1>
                             }
                             <h3>
                                 {
